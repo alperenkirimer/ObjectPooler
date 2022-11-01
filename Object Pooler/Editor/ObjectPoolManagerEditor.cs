@@ -5,12 +5,12 @@ using System.Collections.Generic;
 [CustomEditor(typeof(ObjectPoolManager))]
 public class ObjectPoolManagerEditor : Editor
 {
-    SerializedProperty objectPoolList;
-    SerializedProperty poolInitializationMode;
-    SerializedProperty AllowLogs;
-    SerializedProperty ShowSummary;
+    private SerializedProperty objectPoolList;
+    private SerializedProperty poolInitializationMode;
+    private SerializedProperty allowLogs;
+    private SerializedProperty showSummary;
 
-    ObjectPoolManager manager;
+    private ObjectPoolManager manager;
 
     void OnEnable()
     {
@@ -18,8 +18,8 @@ public class ObjectPoolManagerEditor : Editor
 
         objectPoolList = serializedObject.FindProperty("ObjectPoolList");
         poolInitializationMode = serializedObject.FindProperty("InitMode");
-        AllowLogs = serializedObject.FindProperty("AllowLogs");
-        ShowSummary = serializedObject.FindProperty("ShowSummaryOnInspectorGUI");
+        allowLogs = serializedObject.FindProperty("AllowLogs");
+        showSummary = serializedObject.FindProperty("ShowSummaryOnInspectorGUI");
     }
 
     public override void OnInspectorGUI()
@@ -39,7 +39,7 @@ public class ObjectPoolManagerEditor : Editor
         EditorGUILayout.LabelField("Manager Settings", EditorStyles.largeLabel);
         EditorGUILayout.Separator();
         EditorGUILayout.PropertyField(poolInitializationMode);
-        EditorGUILayout.PropertyField(AllowLogs);
+        EditorGUILayout.PropertyField(allowLogs);
     }
 
     void DrawPoolObjects()
@@ -140,9 +140,9 @@ public class ObjectPoolManagerEditor : Editor
 
     void DrawPoolSummary()
     {
-        ShowSummary.boolValue = EditorGUILayout.BeginFoldoutHeaderGroup(ShowSummary.boolValue, "Pool Summary");
+        showSummary.boolValue = EditorGUILayout.BeginFoldoutHeaderGroup(showSummary.boolValue, "Pool Summary");
 
-        if (ShowSummary.boolValue)
+        if (showSummary.boolValue)
         {
             EditorGUILayout.Separator();
             EditorGUILayout.HelpBox("Pool is initialized: " + manager.IsInitialized, MessageType.Info);
