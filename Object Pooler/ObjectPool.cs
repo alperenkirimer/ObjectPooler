@@ -8,7 +8,7 @@ public class ObjectPool
 
     public GameObject PoolParent;
 
-    public List<GameObject> InstancesInUse = new List<GameObject>();
+    public HashSet<GameObject> InstancesInUse = new HashSet<GameObject>();
     public List<GameObject> InstancesInReserve = new List<GameObject>();
 
     public int Count = 50;

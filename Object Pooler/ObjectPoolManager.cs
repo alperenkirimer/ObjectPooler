@@ -231,18 +231,18 @@ public class ObjectPoolManager : MonoBehaviour
         gameObj.SetActive(false);
     }
 
-    private List<GameObject> GetInstancesInReserveByInstance(GameObject gameObj) => allInstances[gameObj].InstancesInReserve;
-    private List<GameObject> GetInstancesInReserveByPrefab(GameObject prefab) => poolPrefabs[prefab].InstancesInReserve;
-    private List<GameObject> GetInstancesInUseByInstance(GameObject gameObj) => allInstances[gameObj].InstancesInUse;
-    private List<GameObject> GetInstancesInUseByPrefab(GameObject prefab) => poolPrefabs[prefab].InstancesInUse;
+    private List<GameObject> GetInstancesInReserveByInstance(GameObject gameObj) => GetObjectPoolByInstance(gameObj).InstancesInReserve;
+    private List<GameObject> GetInstancesInReserveByPrefab(GameObject prefab) => GetObjectPoolByPrefab(prefab).InstancesInReserve;
+    private HashSet<GameObject> GetInstancesInUseByInstance(GameObject gameObj) => GetObjectPoolByInstance(gameObj).InstancesInUse;
+    private HashSet<GameObject> GetInstancesInUseByPrefab(GameObject prefab) => GetObjectPoolByPrefab(prefab).InstancesInUse;
     public int GetCountInReserveByInstance(GameObject gameObj) => GetInstancesInReserveByInstance(gameObj).Count;
     public int GetCountInReserveByPrefab(GameObject prefab) => GetInstancesInReserveByPrefab(prefab).Count;
     public int GetCountInUseByInstance(GameObject gameObj) => GetInstancesInUseByInstance(gameObj).Count;
     public int GetCountInUseByPrefab(GameObject prefab) => GetInstancesInUseByPrefab(prefab).Count;
     public int GetCountTotalByInstance(GameObject gameObj) => GetCountInReserveByInstance(gameObj) + GetCountInUseByInstance(gameObj);
     public int GetCountTotalByPrefab(GameObject prefab) => GetCountInReserveByPrefab(prefab) + GetCountInUseByPrefab(prefab);
-    public ObjectPool GetObjectPoolByInstance(GameObject gameObj) => allInstances[gameObj];
-    public ObjectPool GetObjectPoolByPrefab(GameObject prefab) => poolPrefabs[prefab];
+    private ObjectPool GetObjectPoolByInstance(GameObject gameObj) => allInstances[gameObj];
+    private ObjectPool GetObjectPoolByPrefab(GameObject prefab) => poolPrefabs[prefab];
     private bool CheckPrefabExistsInPool(GameObject prefab) => poolPrefabs.ContainsKey(prefab);
     private bool CheckInstanceExistsInPool(GameObject gameObj) => allInstances.ContainsKey(gameObj);
     public bool IsInstanceInReserve(GameObject gameObj) => gameObj.transform.parent == GetObjectPoolByInstance(gameObj).PoolParent;
