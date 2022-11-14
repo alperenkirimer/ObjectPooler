@@ -44,6 +44,8 @@ Instead of destroying an object, we send it back to the pool by `Recycle()`.
 
 ## Object Pool Manager Inspector
 
+![Manager Inspector Screenshot](https://raw.githubusercontent.com/alperenkirimer/ObjectPooler/main/ObjectPooler-Screenshot.PNG)
+
 #### Init Mode
 
 Sets when the manager is going to be initialized. `AWAKE` is recommended. However, you can also choose `START` or `MANUAL`. In order to initialize manually, you have to call `ObjectPoolManager.InitializeObjectPoolManager();` at the desired point.
